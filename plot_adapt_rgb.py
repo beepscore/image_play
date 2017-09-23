@@ -25,7 +25,6 @@ filters:
 from skimage.color.adapt_rgb import adapt_rgb, each_channel, hsv_value
 from skimage import filters
 
-
 @adapt_rgb(each_channel)
 def sobel_each(image):
     return filters.sobel(image)
@@ -45,6 +44,14 @@ from skimage.exposure import rescale_intensity
 import matplotlib.pyplot as plt
 
 image = data.astronaut()
+
+###
+# show unprocessed image
+fig0 = plt.figure(figsize=(14, 7))
+ax_each = fig0.add_subplot(121, adjustable='box-forced')
+ax_each.imshow(image)
+plt.show()
+###
 
 fig = plt.figure(figsize=(14, 7))
 ax_each = fig.add_subplot(121, adjustable='box-forced')
