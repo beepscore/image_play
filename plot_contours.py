@@ -39,7 +39,8 @@ print(gray_image)
 # Find contours at a constant level
 # http://scikit-image.org/docs/0.8.0/api/skimage.measure.find_contours.html
 level = 0.25
-contours = measure.find_contours(gray_image, level)
+fully_connected = 'low'
+contours = measure.find_contours(gray_image, level, fully_connected)
 
 # Display the image and plot all contours found
 fig, ax = plt.subplots()
