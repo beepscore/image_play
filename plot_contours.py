@@ -18,22 +18,32 @@ Cubes: A High Resolution 3D Surface Construction Algorithm. Computer Graphics
 
 # http://scikit-image.org/docs/dev/auto_examples/edges/plot_contours.html#sphx-glr-auto-examples-edges-plot-contours-py
 
-import numpy as np
 import matplotlib.pyplot as plt
+import os
 
+from skimage import color
+from skimage import io
 from skimage import measure
 
 
-# Construct some test data
-x, y = np.ogrid[-np.pi:np.pi:100j, -np.pi:np.pi:100j]
-r = np.sin(np.exp((np.sin(x)**3 + np.cos(y)**2)))
+data_in_dir = './data/in'
+filename = os.path.join(data_in_dir, 'rocket.jpg')
+image = io.imread(filename)
 
-# Find contours at a constant value of 0.8
-contours = measure.find_contours(r, 0.8)
+# convert image to grayscale
+# https://stackoverflow.com/questions/27026866/convert-an-image-to-2d-array-in-python#27028142
+gray_image = color.rgb2gray(image)
+print('gray_image')
+print(gray_image)
+
+# Find contours at a constant level
+# http://scikit-image.org/docs/0.8.0/api/skimage.measure.find_contours.html
+level = 0.25
+contours = measure.find_contours(gray_image, level)
 
 # Display the image and plot all contours found
 fig, ax = plt.subplots()
-ax.imshow(r, interpolation='nearest', cmap=plt.cm.gray)
+ax.imshow(gray_image, interpolation='nearest', cmap=plt.cm.gray)
 
 for n, contour in enumerate(contours):
     ax.plot(contour[:, 1], contour[:, 0], linewidth=2)
