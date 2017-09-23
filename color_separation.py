@@ -19,9 +19,9 @@ cmap_eosin = LinearSegmentedColormap.from_list('mycmap', ['darkviolet',
 # ihc_rgb = data.immunohistochemistry()
 # custom image
 data_in_dir = './data/in'
-filename = os.path.join(data_in_dir, 'sun.jpg')
-sun = io.imread(filename)
-ihc_rgb = sun
+# filename = os.path.join(data_in_dir, 'sun.jpg')
+filename = os.path.join(data_in_dir, 'obama.jpg')
+ihc_rgb = io.imread(filename)
 
 ihc_hed = rgb2hed(ihc_rgb)
 
