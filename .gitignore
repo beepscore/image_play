@@ -126,7 +126,11 @@ fabric.properties
 venv/*
 
 # program data files
-data/*
+data/in/*
+# public domain images from us government
+!data/in/obama.jpg
+!data/in/swordfish.jpg
+!data/in/sun.jpg
 
 # text files
 *.txt
