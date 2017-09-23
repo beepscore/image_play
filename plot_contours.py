@@ -21,7 +21,10 @@ Cubes: A High Resolution 3D Surface Construction Algorithm. Computer Graphics
 import matplotlib.pyplot as plt
 import os
 
+import numpy as np
+
 from skimage import color
+from skimage import exposure
 from skimage import io
 from skimage import measure
 
@@ -36,15 +39,23 @@ gray_image = color.rgb2gray(image)
 print('gray_image')
 print(gray_image)
 
+# Stretch contrast
+# http://scikit-image.org/docs/dev/user_guide/transforming_image_data.html
+v_min, v_max = np.percentile(gray_image, (0.2, 99.8))
+better_contrast = exposure.rescale_intensity(gray_image, in_range=(v_min, v_max))
+
 # Find contours at a constant level
 # http://scikit-image.org/docs/0.8.0/api/skimage.measure.find_contours.html
-level = 0.25
+# ~ optimize level for rocket nozzle contours - adjusted by manual iteration trial and error
+level = 0.28
+# fully_connected default is low
 fully_connected = 'low'
-contours = measure.find_contours(gray_image, level, fully_connected)
+contours = measure.find_contours(better_contrast, level, fully_connected)
 
-# Display the image and plot all contours found
+# Display the processed image and plot all contours found
 fig, ax = plt.subplots()
-ax.imshow(gray_image, interpolation='nearest', cmap=plt.cm.gray)
+# ax.imshow(image)
+ax.imshow(better_contrast, interpolation='nearest', cmap=plt.cm.gray)
 
 for n, contour in enumerate(contours):
     ax.plot(contour[:, 1], contour[:, 0], linewidth=2)
