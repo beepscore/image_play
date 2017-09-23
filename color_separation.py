@@ -4,7 +4,10 @@ import matplotlib.pyplot as plt
 from matplotlib.colors import LinearSegmentedColormap
 
 from skimage import data
+from skimage import io
 from skimage.color import rgb2hed
+
+import os
 
 # Create an artificial color close to the orginal one
 cmap_hema = LinearSegmentedColormap.from_list('mycmap', ['white', 'navy'])
@@ -12,8 +15,14 @@ cmap_dab = LinearSegmentedColormap.from_list('mycmap', ['white',
                                              'saddlebrown'])
 cmap_eosin = LinearSegmentedColormap.from_list('mycmap', ['darkviolet',
                                                'white'])
+# skimage data example
+# ihc_rgb = data.immunohistochemistry()
+# custom image
+data_in_dir = './data/in'
+filename = os.path.join(data_in_dir, 'sun.jpg')
+sun = io.imread(filename)
+ihc_rgb = sun
 
-ihc_rgb = data.immunohistochemistry()
 ihc_hed = rgb2hed(ihc_rgb)
 
 fig, axes = plt.subplots(2, 2, figsize=(7, 6), sharex=True, sharey=True,
