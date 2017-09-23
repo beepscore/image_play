@@ -129,6 +129,7 @@ venv/*
 data/in/*
 # public domain images from us government
 !data/in/obama.jpg
+!data/in/rocket.jpg
 !data/in/swordfish.jpg
 !data/in/sun.jpg
 
