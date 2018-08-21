@@ -17,4 +17,4 @@ http://www.scipy-lectures.org/packages/scikit-image/index.html#scikit-image
 
 # Appendix Anaconda environment
 
-    source activate beepscore
+    conda activate beepscore
